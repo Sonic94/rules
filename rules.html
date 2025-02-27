@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifestyleRP Rules</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #171a21; /* Steam dark background */
+            color: #c7d5e0; /* Steam light text */
+            overflow-x: hidden;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            max-width: 1100px;
+            background: #171a21;
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            text-align: center;
+        }
+        .nav-bar a {
+            color: #c7d5e0;
+            text-decoration: none;
+            margin: 0 25px;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .nav-bar a:hover {
+            color: #66c0f4;
+            text-shadow: 0 0 10px rgba(102, 192, 244, 0.6);
+        }
+        .disclaimer {
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #c7d5e0;
+            background: #1b2526; /* Steam secondary dark */
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            max-width: 80%;
+            margin: 70px auto 20px;
+            line-height: 1.4;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            padding: 20px 30px 30px;
+            background: #2a3b47; /* Steam mid-tone */
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            color: #c7d5e0;
+            animation: fadeIn 1.2s ease-in;
+            width: 100%;
+        }
+        .search-bar {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 1.1em;
+            font-family: 'Montserrat', sans-serif;
+            background: #1b2526;
+            color: #c7d5e0;
+            border: 1px solid #66c0f4;
+            border-radius: 5px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-bar input:focus {
+            border-color: #66c0f4;
+            box-shadow: 0 0 10px rgba(102, 192, 244, 0.4);
+        }
+        h1 {
+            text-align: center;
+            color: #66c0f4; /* Steam blue */
+            font-size: 3.5em;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            animation: slideIn 1s ease-out;
+        }
+        h2 {
+            color: #c7d5e0;
+            font-size: 2.2em;
+            font-weight: 700;
+            padding: 15px 20px;
+            background: #1b2526;
+            border: 3px solid #66c0f4;
+            border-radius: 5px;
+            margin: 20px 0 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(102, 192, 244, 0.3);
+        }
+        h2:hover {
+            background: #66c0f4;
+            color: #171a21;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 192, 244, 0.6);
+        }
+        h3 {
+            color: #c7d5e0;
+            font-size: 1.6em;
+            font-weight: 600;
+            margin: 15px 0;
+            text-align: center;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+        li:hover {
+            color: #66c0f4;
+            padding-left: 8px;
+        }
+        p {
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #b8c6d1;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 25px;
+            padding: 0 20px 20px;
+            background: #2a3b47;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: block;
+            border: 2px solid #66c0f4;
+            box-shadow: 0 0 8px rgba(102, 192, 244, 0.25);
+        }
+        .section .content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .section.collapsed .content {
+            max-height: 0;
+        }
+        .section.hidden {
+            display: none;
+        }
+        .highlight {
+            background: #66c0f4;
+            color: #171a21;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .promo-section {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .promo-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+            z-index: 1;
+        }
+        .promo-section .promo-content {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+            font-size: 1.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Shadow for readability */
+        }
+        .promo-section a {
+            color: #66c0f4;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .promo-section a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(102, 192, 244, 0.8);
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 1.1em;
+            color: #c7d5e0;
+            background: #171a21;
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 0; /* Adjusted to follow promo section */
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+        }
+        .easter-egg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #66c0f4;
+            color: #171a21;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            font-size: 1.1em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        .easter-egg.show {
+            opacity: 1;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-60px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .disclaimer { font-size: 0.75em; padding: 8px 15px; max-width: 90%; }
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.8em; padding: 10px 15px; }
+            .nav-bar a { font-size: 1em; margin: 0 15px; }
+            .container { margin: 0 15px 20px; padding: 20px; }
+            li { font-size: 1em; }
+            .easter-egg { font-size: 0.9em; padding: 10px 15px; }
+            .search-bar input { font-size: 1em; }
+            .promo-section .promo-content { font-size: 1.2em; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="nav-bar">
+        <a onclick="scrollToSection('laws')">Laws</a>
+        <a onclick="scrollToSection('rules')">Rules</a>
+        <a onclick="scrollToSection('basing')">Basing & Raiding</a>
+        <a onclick="scrollToSection('group')">Group Rules</a>
+        <a onclick="scrollToSection('explanations')">Explanations</a>
+    </div>
+
+    <div class="disclaimer">
+        By joining the server you agree to follow all rules stated below. Anything not explicitly stated within the rules will be up to staff interpretations.
+    </div>
+
+    <div class="container">
+        <h1>LifestyleRP Rules</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search rules..." onkeyup="searchRules()">
+        </div>
+
+        <div class="section" id="laws">
+            <h2 onclick="toggleSection(this)">In-Server Laws</h2>
+            <div class="content">
+                <p>Built on U.S. law, with our own twists:</p>
+                <ol>
+                    <li>Weed's legal with a "weed card"—max 6 plants.</li>
+                    <li>Speed limits: 35 in city, 55 outside. Simple.</li>
+                    <li>Pistols OK in public. Shotguns? Only on your turf. Autos are banned everywhere. Cops ask you to stow it first (just a citation), but refuse and it's cuffs time.</li>
+                    <li>No street parking in town unless it's got meters.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section" id="rules">
+            <h2 onclick="toggleSection(this)">Rules</h2>
+            <div class="content">
+                <ol>
+                    <li>Common sense is king.</li>
+                    <li>Respect everyone—no trash talk or hate speech, ever.</li>
+                    <li>No FailRP. Stick to real-life vibes. No serial killer sprees—keep it fun for all. Also, no phone fiddling in cuffs.</li>
+                    <li>No metagaming. Use only what your character knows. Head tags? OOC only, not RP.</li>
+                    <li>Follow the Renewed Life Rule (RLR)—details below.</li>
+                    <li>Props are for RP, not parkour or pushing.</li>
+                    <li>No hacking. Caught? Permanent IP ban.</li>
+                    <li>Ban evasion = IP ban + all accounts torched.</li>
+                    <li>Drive like you mean it. Pursuits can get wild, but no fail-driving otherwise.</li>
+                    <li>Obey cops unless you're packing a warrant or contraband—RP smart.</li>
+                    <li>No powergaming. Forcing RP (like kidnapping without OOC OK) is out. Robberies? Fair game.</li>
+                    <li>No cop baiting for kicks. This is RP, not GTA.</li>
+                    <li>No combat logging—stick around for the action.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section" id="basing">
+            <h2 onclick="toggleSection(this)">Basing & Raiding</h2>
+            <div class="content">
+                <ol>
+                    <li>Raid whoever, whenever—up to 10 players. Grab loot, dip in 10 mins max. No camping or claiming. Wait 45 mins to hit the same spot. If raided, stay out 'til it's over (10 mins). Max 10 raiders, org required, lockpick unless unlocked. No store basing/raiding.</li>
+                    <li>Mugging or kidnapping? OOC consent or bust.</li>
+                    <li>No RDM. Kill only to save yourself or others.</li>
+                    <li>Barricades must look legit.</li>
+                    <li>Orgs cap at 10—break it, and it's gone.</li>
+                </ol>
+                <h3>Rackets</h3>
+                <p>No bullet-soaked heroics to defend—just RP it real. Names? Keep 'em tame, no celebs or politics. Admins might rename you if it's whack.</p>
+            </div>
+        </div>
+
+        <div class="section" id="group">
+            <h2 onclick="toggleSection(this)">Group-Specific Rules</h2>
+            <div class="content">
+                <h3>Citizen</h3>
+                <ol>
+                    <li>Cuffed? Follow orders unless your crew's springing you. No solo car escapes.</li>
+                    <li>Cops raiding? Fight back, but don't return 'til they're out.</li>
+                </ol>
+                <h3>Police</h3>
+                <ol>
+                    <li>Traffic stops: Lights, sirens, maybe a "Pull over!" yell.</li>
+                    <li>Need probable cause—speeding, crimes, reports. Ask if unsure.</li>
+                    <li>Radio up (T or /radio)—stops, calls, backup, all of it.</li>
+                    <li>Warrants need proof—like !lookup or a witness.</li>
+                    <li>Cuffed? They're yours, but orgs might crash the party.</li>
+                    <li>Raids: Seize illegals, arrest the target (or anyone dirty). Downed? Return only if called.</li>
+                    <li>No dirty cops. Shotgun out? Tell 'em to stow it first—arrest only if they defy.</li>
+                </ol>
+                <h3>Medic / Firefighter</h3>
+                <ol>
+                    <li>Not cops—stay out of the fray. Stage safe, move in post-clear.</li>
+                    <li>Chill anywhere between calls—RP it up.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section" id="explanations">
+            <h2 onclick="toggleSection(this)">Explanations</h2>
+            <div class="content">
+                <h3>RLR (Renewed Life Rule)</h3>
+                <p>You don't die—you respawn as you. Here's the deal:</p>
+                <ol>
+                    <li>5-min recovery post-hospital before heading back.</li>
+                    <li>Raid/event downed (non-cop)? Wait 'til it's done + recovery.</li>
+                    <li>No revenge—new beef needs new reasons.</li>
+                </ol>
+                <p>Cops can nab you at the hospital. Wanted? Jail after recovery.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="promo-section">
+        <div class="promo-content">
+            Powered by <a href="https://usgamehosting.com" target="_blank">US Game Hosting</a> - Premium Server Hosting for Your Gaming Needs! Visit us at <a href="https://usgamehosting.com" target="_blank">usgamehosting.com</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Last Updated: February 27, 2025 | Step Into the LifestyleRP Legend</p>
+    </footer>
+
+    <div class="easter-egg" id="easterEgg">Thanks for reading the rules!</div>
+
+    <script>
+        // Toggle section visibility with height animation
+        function toggleSection(header) {
+            const section = header.parentElement;
+            section.classList.toggle('collapsed');
+        }
+
+        // Smooth scroll to section and expand it
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+            }
+            if (section.classList.contains('hidden')) {
+                section.classList.remove('hidden');
+            }
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Start with all sections expanded
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('collapsed');
+            section.classList.remove('hidden');
+        });
+
+        // Easter egg notification
+        const easterEgg = document.getElementById('easterEgg');
+        let hasShown = false;
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+
+            if (scrollPosition >= documentHeight - 50 && !hasShown) {
+                easterEgg.classList.add('show');
+                hasShown = true;
+                setTimeout(() => {
+                    easterEgg.classList.remove('show');
+                }, 3000);
+            }
+        });
+
+        // Search functionality
+        function searchRules() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                const content = section.querySelector('.content');
+                const text = content.textContent.toLowerCase();
+                const header = section.querySelector('h2').textContent.toLowerCase();
+
+                // Reset previous highlights
+                content.innerHTML = content.textContent;
+
+                if (input === '') {
+                    section.classList.remove('hidden');
+                    section.classList.remove('collapsed');
+                } else if (text.includes(input) || header.includes(input)) {
+                    section.classList.remove('hidden');
+                    section.classList.remove('collapsed');
+
+                    // Highlight matching text
+                    if (text.includes(input)) {
+                        const regex = new RegExp(`(${input})`, 'gi');
+                        content.innerHTML = content.textContent.replace(regex, '<span class="highlight">$1</span>');
+                    }
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
